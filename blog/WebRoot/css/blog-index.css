@@ -1,0 +1,22 @@
+.eachblog{
+	overflow:hidden;
+	padding:0;
+	margin:0 auto;
+	width:225px;
+	height:142px;
+}
+.imgPic{
+    -moz-transition: all 1s ease 0s;
+    -o-transition: all 1s ease 0s;
+    -webkit-transition: all 1s ease 0s;
+    transition: all 1s ease 0s;
+    cursor:pointer;
+}
+
+.imgPic:hover{
+	-webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+}
