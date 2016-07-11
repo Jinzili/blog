@@ -1,9 +1,8 @@
-var bookStoreApp = angular.module('bookStoreApp', [
-    'ngRoute', 'ngAnimate', 'bookStoreCtrls', 'bookStoreFilters',
-    'bookStoreServices', 'bookStoreDirectives'
+var blogApp = angular.module('blogApp', [
+    'ngRoute', 'ngAnimate',  'blogDirectices','blogCtrls','blogService'
 ]);
 
-bookStoreApp.config(function($routeProvider) {
+blogApp.config(function($routeProvider) {
     $routeProvider.when('/hello', {
         templateUrl: 'tpls/hello.jsp',
         controller: 'HelloCtrl'

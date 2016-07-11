@@ -1,30 +1,38 @@
-var bookStoreCtrls = angular.module('bookStoreCtrls', []);
+var blogCtrls = angular.module('blogCtrls', ['tm.pagination']);
 
-bookStoreCtrls.controller('HelloCtrl', ['$scope',
+blogCtrls.controller('HelloCtrl', ['$scope',
     function($scope) {
-        $scope.greeting = {
-            text: 'Hello'
-        };
-        $scope.pageClass="hello";
+       
     }
 ]);
 
-bookStoreCtrls.controller('BookListCtrl', ['$scope',
-    function($scope) {
-        $scope.books = [{
-            title: "《Ext江湖》",
-            author: "大漠穷秋"
-        }, {
-            title: "《ActionScript游戏设计基础（第二版）》",
-            author: "大漠穷秋"
-        }, {
-            title: "《用AngularJS开发下一代WEB应用》",
-            author: "大漠穷秋"
-        }];
-        $scope.pageClass="list";
-    }
+blogCtrls.controller('pageCtrl', ['$scope','pageService',
+    function($scope,pageService) {
+		var GetAllBlog = function () {
+			 
+	        var postData = {
+	            pageIndex: $scope.paginationConf.currentPage,
+	            pageSize: $scope.paginationConf.itemsPerPage
+	        }
+	
+	        pageService.list(postData).success(function (response) {
+	            $scope.paginationConf.totalItems = response.count;
+	            $scope.persons = response.items;
+	        });
+	
+	    }
+	
+	    //配置分页基本参数
+	    $scope.paginationConf = {
+	        currentPage: 1,
+	        itemsPerPage: 9
+	    };
+	
+	    /***************************************************************
+	    当页码和页面记录数发生变化时监控后台查询
+	    如果把currentPage和itemsPerPage分开监控的话则会触发两次后台事件。 
+	    ***************************************************************/
+	    	$scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', GetAllBlog);
+	    }
 ]);
 
-/**
- * 这里接着往下写，如果控制器的数量非常多，需要分给多个开发者，可以借助于grunt来合并代码
- */

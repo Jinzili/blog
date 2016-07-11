@@ -1,9 +1,13 @@
-var bookStoreServices = angular.module('bookStoreServices', []);
+var blogServices = angular.module('blogServices', []);
 
-bookStoreServices.service('bookStoreService_1', ['$scope',
-    function($scope) {}
+blogServices.service('pageService', ['$http',
+    function($http) {
+		this.list = function(postData){
+			return $http.post('/blog/blog/getAllBlogs', postData);
+		};
+	}
 ]);
 
-bookStoreServices.service('bookStoreService_2', ['$scope',
+blogServices.service('bookStoreService_2', ['$scope',
     function($scope) {}
 ]);
