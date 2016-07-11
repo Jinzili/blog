@@ -7,7 +7,9 @@ public class Blog {
 
     private String title;
 
-    private String subject;
+    private String image;
+
+    private String summary;
 
     private Date created;
 
@@ -31,12 +33,20 @@ public class Blog {
         this.title = title == null ? null : title.trim();
     }
 
-    public String getSubject() {
-        return subject;
+    public String getImage() {
+        return image;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject == null ? null : subject.trim();
+    public void setImage(String image) {
+        this.image = image == null ? null : image.trim();
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary == null ? null : summary.trim();
     }
 
     public Date getCreated() {

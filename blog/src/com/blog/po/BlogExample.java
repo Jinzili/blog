@@ -235,73 +235,143 @@ public class BlogExample {
             return (Criteria) this;
         }
 
-        public Criteria andSubjectIsNull() {
-            addCriterion("subject is null");
+        public Criteria andImageIsNull() {
+            addCriterion("image is null");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectIsNotNull() {
-            addCriterion("subject is not null");
+        public Criteria andImageIsNotNull() {
+            addCriterion("image is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectEqualTo(String value) {
-            addCriterion("subject =", value, "subject");
+        public Criteria andImageEqualTo(String value) {
+            addCriterion("image =", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectNotEqualTo(String value) {
-            addCriterion("subject <>", value, "subject");
+        public Criteria andImageNotEqualTo(String value) {
+            addCriterion("image <>", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectGreaterThan(String value) {
-            addCriterion("subject >", value, "subject");
+        public Criteria andImageGreaterThan(String value) {
+            addCriterion("image >", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectGreaterThanOrEqualTo(String value) {
-            addCriterion("subject >=", value, "subject");
+        public Criteria andImageGreaterThanOrEqualTo(String value) {
+            addCriterion("image >=", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectLessThan(String value) {
-            addCriterion("subject <", value, "subject");
+        public Criteria andImageLessThan(String value) {
+            addCriterion("image <", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectLessThanOrEqualTo(String value) {
-            addCriterion("subject <=", value, "subject");
+        public Criteria andImageLessThanOrEqualTo(String value) {
+            addCriterion("image <=", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectLike(String value) {
-            addCriterion("subject like", value, "subject");
+        public Criteria andImageLike(String value) {
+            addCriterion("image like", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectNotLike(String value) {
-            addCriterion("subject not like", value, "subject");
+        public Criteria andImageNotLike(String value) {
+            addCriterion("image not like", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectIn(List<String> values) {
-            addCriterion("subject in", values, "subject");
+        public Criteria andImageIn(List<String> values) {
+            addCriterion("image in", values, "image");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectNotIn(List<String> values) {
-            addCriterion("subject not in", values, "subject");
+        public Criteria andImageNotIn(List<String> values) {
+            addCriterion("image not in", values, "image");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectBetween(String value1, String value2) {
-            addCriterion("subject between", value1, value2, "subject");
+        public Criteria andImageBetween(String value1, String value2) {
+            addCriterion("image between", value1, value2, "image");
             return (Criteria) this;
         }
 
-        public Criteria andSubjectNotBetween(String value1, String value2) {
-            addCriterion("subject not between", value1, value2, "subject");
+        public Criteria andImageNotBetween(String value1, String value2) {
+            addCriterion("image not between", value1, value2, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andSummaryIsNull() {
+            addCriterion("summary is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSummaryIsNotNull() {
+            addCriterion("summary is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSummaryEqualTo(String value) {
+            addCriterion("summary =", value, "summary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSummaryNotEqualTo(String value) {
+            addCriterion("summary <>", value, "summary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSummaryGreaterThan(String value) {
+            addCriterion("summary >", value, "summary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSummaryGreaterThanOrEqualTo(String value) {
+            addCriterion("summary >=", value, "summary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSummaryLessThan(String value) {
+            addCriterion("summary <", value, "summary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSummaryLessThanOrEqualTo(String value) {
+            addCriterion("summary <=", value, "summary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSummaryLike(String value) {
+            addCriterion("summary like", value, "summary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSummaryNotLike(String value) {
+            addCriterion("summary not like", value, "summary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSummaryIn(List<String> values) {
+            addCriterion("summary in", values, "summary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSummaryNotIn(List<String> values) {
+            addCriterion("summary not in", values, "summary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSummaryBetween(String value1, String value2) {
+            addCriterion("summary between", value1, value2, "summary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSummaryNotBetween(String value1, String value2) {
+            addCriterion("summary not between", value1, value2, "summary");
             return (Criteria) this;
         }
 

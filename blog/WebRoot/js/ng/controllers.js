@@ -2,7 +2,10 @@ var blogCtrls = angular.module('blogCtrls', ['tm.pagination']);
 
 blogCtrls.controller('HelloCtrl', ['$scope',
     function($scope) {
-       
+	 $scope.greeting = {
+        text: 'Hello'
+	 };
+	 $scope.pageClass="hello";
     }
 ]);
 
@@ -16,8 +19,9 @@ blogCtrls.controller('pageCtrl', ['$scope','pageService',
 	        }
 	
 	        pageService.list(postData).success(function (response) {
+	        	console.log(response);
 	            $scope.paginationConf.totalItems = response.count;
-	            $scope.persons = response.items;
+	            $scope.blogs = response.items;
 	        });
 	
 	    }
@@ -25,7 +29,8 @@ blogCtrls.controller('pageCtrl', ['$scope','pageService',
 	    //配置分页基本参数
 	    $scope.paginationConf = {
 	        currentPage: 1,
-	        itemsPerPage: 9
+	        itemsPerPage: 9,
+	        perPageOptions: [9],
 	    };
 	
 	    /***************************************************************
@@ -33,6 +38,12 @@ blogCtrls.controller('pageCtrl', ['$scope','pageService',
 	    如果把currentPage和itemsPerPage分开监控的话则会触发两次后台事件。 
 	    ***************************************************************/
 	    	$scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', GetAllBlog);
+	    	$scope.$watch(function(){
+	    		   return document.documentElement.clientHeight;
+	    		}, function(value) {
+	    		        angular.element(".myself").css("height",""+value+"px");
+	    		        angular.element(".right-box").css("height",""+value+"px");
+	    		  });
 	    }
 ]);
 

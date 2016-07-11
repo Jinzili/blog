@@ -4,7 +4,8 @@
   <resultMap id="BaseResultMap" type="com.blog.po.Blog" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="subject" property="subject" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
     <result column="created" property="created" jdbcType="TIMESTAMP" />
     <result column="updated" property="updated" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, title, subject, created, updated
+    id, title, image, summary, created, updated
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -124,12 +125,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.blog.po.Blog" >
-    insert into blog (id, title, subject, 
-      created, updated, content
-      )
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, 
-      #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
-      )
+    insert into blog (id, title, image, 
+      summary, created, updated, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{summary,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.blog.po.Blog" >
     insert into blog
@@ -140,8 +141,11 @@
       <if test="title != null" >
         title,
       </if>
-      <if test="subject != null" >
-        subject,
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="summary != null" >
+        summary,
       </if>
       <if test="created != null" >
         created,
@@ -160,8 +164,11 @@
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="subject != null" >
-        #{subject,jdbcType=VARCHAR},
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
       </if>
       <if test="created != null" >
         #{created,jdbcType=TIMESTAMP},
@@ -189,8 +196,11 @@
       <if test="record.title != null" >
         title = #{record.title,jdbcType=VARCHAR},
       </if>
-      <if test="record.subject != null" >
-        subject = #{record.subject,jdbcType=VARCHAR},
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.summary != null" >
+        summary = #{record.summary,jdbcType=VARCHAR},
       </if>
       <if test="record.created != null" >
         created = #{record.created,jdbcType=TIMESTAMP},
@@ -210,7 +220,8 @@
     update blog
     set id = #{record.id,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
-      subject = #{record.subject,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      summary = #{record.summary,jdbcType=VARCHAR},
       created = #{record.created,jdbcType=TIMESTAMP},
       updated = #{record.updated,jdbcType=TIMESTAMP},
       content = #{record.content,jdbcType=LONGVARCHAR}
@@ -222,7 +233,8 @@
     update blog
     set id = #{record.id,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
-      subject = #{record.subject,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      summary = #{record.summary,jdbcType=VARCHAR},
       created = #{record.created,jdbcType=TIMESTAMP},
       updated = #{record.updated,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -235,8 +247,11 @@
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="subject != null" >
-        subject = #{subject,jdbcType=VARCHAR},
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
       </if>
       <if test="created != null" >
         created = #{created,jdbcType=TIMESTAMP},
@@ -253,7 +268,8 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.blog.po.Blog" >
     update blog
     set title = #{title,jdbcType=VARCHAR},
-      subject = #{subject,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
       created = #{created,jdbcType=TIMESTAMP},
       updated = #{updated,jdbcType=TIMESTAMP},
       content = #{content,jdbcType=LONGVARCHAR}
@@ -262,7 +278,8 @@
   <update id="updateByPrimaryKey" parameterType="com.blog.po.Blog" >
     update blog
     set title = #{title,jdbcType=VARCHAR},
-      subject = #{subject,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
       created = #{created,jdbcType=TIMESTAMP},
       updated = #{updated,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

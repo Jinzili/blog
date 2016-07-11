@@ -1,5 +1,5 @@
 var blogApp = angular.module('blogApp', [
-    'ngRoute', 'ngAnimate',  'blogDirectices','blogCtrls','blogService'
+    'ngRoute', 'ngAnimate',  'blogDirectices','blogCtrls','blogServices'
 ]);
 
 blogApp.config(function($routeProvider) {
@@ -8,7 +8,7 @@ blogApp.config(function($routeProvider) {
         controller: 'HelloCtrl'
     }).when('/index', {
         templateUrl: 'tpls/blog-index.jsp',
-        controller: 'BookListCtrl'
+        controller: 'pageCtrl'
     }).otherwise({
         redirectTo: '/hello'
     });

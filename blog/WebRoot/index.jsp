@@ -21,10 +21,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="<%=path %>/framework/font-awesome-4.5.0/css/font-awesome.css">
     <link rel="stylesheet" href="<%=path %>/css/blog-hello.css">
     <link rel="stylesheet" href="<%=path %>/css/blog-index.css">
+    
+    <script src="<%=path %>/framework/jquery-2.1.1.min.js"></script>
     <script src="<%=path %>/framework/1.3.0.14/angular.js"></script>
     <script src="<%=path %>/framework/1.3.0.14/angular-route.js"></script>
     <script src="<%=path %>/framework/1.3.0.14/angular-animate.js"></script>
     <script src="<%=path %>/framework/1.3.0.14/tm.pagination.js"></script>
+    <script src="<%=path %>/framework/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script src="<%=path %>/js/ng/app.js"></script>
     <script src="<%=path %>/js/ng/controllers.js"></script>
     <script src="<%=path %>/js/ng/filters.js"></script>
