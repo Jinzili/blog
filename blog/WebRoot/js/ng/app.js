@@ -9,6 +9,9 @@ blogApp.config(function($routeProvider) {
     }).when('/index', {
         templateUrl: 'tpls/blog-index.jsp',
         controller: 'pageCtrl'
+    }).when('/newblog', {
+        templateUrl: 'tpls/newblog.jsp',
+        controller: 'blogCtrl'
     }).otherwise({
         redirectTo: '/hello'
     });

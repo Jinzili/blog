@@ -6,6 +6,11 @@
 	margin-bottom:10px;
 }
 
+.upload_preview{
+	width:548px;
+	border:0;
+}
+
 .header section{
 	color:white;
 	margin:0 auto;
@@ -170,9 +175,6 @@
 .page-total input{
 	height:23px;
 }
-.ng-valid{
-	width:40px;
-}
 
 .newBlogDiv{
 	line-height:14px;
@@ -201,8 +203,8 @@
 }
 
 .footer{
-	margin-top:10px;
-	margin-bottom:0;
+	margin-top:200px;
+	width:100%;	
 }
 
 .footer p{
@@ -210,6 +212,16 @@
 	margin:0;
 	line-height:25px;
 }
+ 
+.simditor a{
+	margin:0;
+}
+
+.simditor-body{
+	height:250px;
+	overflow:auto;
+}
+
 /*没有小于768px，是因为Bootstrap3以移动端优先设计*/
 /* 小屏幕（平板，大于等于768px） */
 @media (min-width: 768px) {
