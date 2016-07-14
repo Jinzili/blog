@@ -1,20 +1,24 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
 <!DOCTYPE html>
 <html>
-<head>
-<title>金自力的博客</title>
-</head>
-
-<body>
-	<header class="header visible-xs-block visible-sm-block" header-bg>
+  <head>
+    <title>新博客</title>
+    
+   <link rel="stylesheet" href="<%=path %>/simditor/styles/simditor.css"  type="text/css" />
+    
+    <script type="text/javascript" src="<%=path %>/simditor/scripts/module.js"></script>
+	<script type="text/javascript" src="<%=path %>/simditor/scripts/hotkeys.js"></script>
+	<script type="text/javascript" src="<%=path %>/simditor/scripts/simditor.js"></script>
+    
+  </head>
+  
+  <body ng-controller="">
+  	<header class="header visible-xs-block visible-sm-block" header-bg>
 
 		<section>
 			<img class="img-circle" width="76px" height="76px"
@@ -41,6 +45,7 @@
 			</ul>
 		</section>
 	</header>
+	
 	<div class="container" style="width:100%" ng-controller="pageCtrl">
 
 		<div class="row">
@@ -76,42 +81,50 @@
 			</div>
 
 
-			<div class="col-md-8 col-sm-12 col-xs-12 right-box" ng-height
-				style="background-color:#fafbff;overflow :auto">
+			<div class="col-md-8 col-sm-12 col-xs-12 right-box" ng-height style="background-color:#fafbff;overflow :auto">
+				
+				
 				<div class="panel panel-default">
 					<div class="panel-body" style="text-align:left">
 						<div class="newBlogDiv">
 							<h3 class="header-h3">
-								<span class="glyphicon glyphicon-book"></span> 已发表的博客
+								<span class="glyphicon glyphicon-pencil"></span> 新建博客
 							</h3>
-							<div class="newBlogImgBox pull-right">
-								<img data-toggle="modal" data-target="#pwdBox" title="写新博客"
-									class="newBlogImg" src="<%=path%>/imgs/plus.png" />
-							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-
-				<div class="col-md-4 col-sm-4 col-xs-12" ng-repeat="blog in blogs">
-					<div class="thumbnail">
-						<div class="eachblog hidden-xs">
-							<img class="imgPic" src="<%=path%>/imgs/subject/test.jpg"
-								title="{{blog.title}}" />
+				
+				<form class="form-horizontal" novalidate="novalidate" ng-submit="createNewBlog(createBlogForm.$valid)" name="createBlogForm" style="width:100%;text-align:left" method="post">
+					<div class="form-group">
+						<label class="col-sm-1 control-label">标题</label>
+						<div class="col-sm-11">
+							<input type="text" class="form-control" id="title" name="title" ng-model="formData.title"
+								placeholder="标题" required autocomplete="off" />
 						</div>
-						<div class="caption">
-							<h3 class="h3-title" title="{{blog.title}}">{{blog.title}}</h3>
-							<p class="hidden-xs hidden-sm"
-								style="text-align:left;margin-bottom:0">{{blog.summary}}</p>
-						</div>
-						<p class="hidden-xs"
-							style="text-align:right;margin-right:5px;margin-bottom:0">{{blog.updated
-							| date:'yyyy-MM-dd HH:mm:ss'}}</p>
 					</div>
-				</div>
-
-				</div>
-				<tm-pagination conf="paginationConf"></tm-pagination>
+					<div class="form-group">
+						<label class="col-sm-1 control-label">摘要</label>
+						<div class="col-sm-11">
+							<input type="text" class="form-control" id="summary" name="summary" ng-model="formData.summary"
+								placeholder="摘要" required autocomplete="off">
+						</div>
+					</div>
+					
+					 <div class="form-group">
+					    <label class="col-sm-1 control-label">内容</label>
+					    <div class="col-sm-11">
+						  <textarea id="editor" name="content"></textarea>
+					    </div>
+					 </div>
+					 
+					 
+					<div class="form-group">
+						<div class="col-sm-offset-1 col-sm-11">
+							<button type="submit" class="btn btn-default">发表</button>
+							<span ng-bind="error" style="color:red"></span>
+						</div>
+					</div>
+				</form>
 				<div class="panel panel-default footer">
 					<p>备案号:12345678</p>
 					<p>联系邮箱:Jinzl_v1@163.com</p>
@@ -120,9 +133,11 @@
 		</div>
 
 	</div>
-
+	
+	
 	<!-- Modal -->
-	<div class="modal fade" id="pwdBox" tabindex="-1" role="dialog"
+	<form class="form-horizontal" style="width:100%;text-align:left" name="uploadImgForm" ng-submit="uploadImg()">
+	<div class="modal fade" id="imgBox" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -131,23 +146,26 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">请输入密码</h4>
+					<h4 class="modal-title" id="myModalLabel">上传展示图片</h4>
 				</div>
 				<div class="modal-body" style="text-align:left">
-					<div class="input-group">
-						<div class="input-group-addon">password</div>
-						<input type="password" class="form-control" id="password"
-							ng-model="password" ng-keyup="validateKeyUp($event)">
-					</div>
-
+					
+						<div class="form-group" style="margin-bottom:0">
+								<label class="col-sm-2 control-label">图片</label>
+								<div class="col-sm-10">
+									<input type="file" id="img" name="img" accept="image/*"/>
+									<p style="margin-bottom:0">展示图片,若不上传则使用默认图片</p>
+								</div>
+						</div>
+					
 				</div>
 				<div class="modal-footer" style="padding-top:5px;padding-bottom:5px">
-					<span ng-bind="error" style="color:red"></span>
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" ng-click="validate()">确认</button>
+					<span ng-bind="uploadfailed" style="color:red"></span>
+					<button type="submit" class="btn btn-primary">确认</button>
 				</div>
 			</div>
 		</div>
 	</div>
-</body>
+	</form>
+  </body>
 </html>
