@@ -16,4 +16,13 @@
 <!-- <bean id="itemsService" class="com.blog.service.impl.ItemsServiceImpl"/>-->
 <!-- 包扫描器，扫描带@Service注解的类 -->
 	<context:component-scan base-package="com.blog.service"></context:component-scan>
+
+	<!-- 配置redis客户端单机版 -->
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool" destroy-method="close">
+		<constructor-arg name="host" value="115.159.212.238"></constructor-arg>
+		<constructor-arg name="port" value="6379"></constructor-arg>
+	</bean>
+	
+	<!-- 配置redis客户端实现类 -->
+	<bean id="jedisClientSingle" class="com.blog.component.JedisClientSingleImpl"></bean>
 </beans> 

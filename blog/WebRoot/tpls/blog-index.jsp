@@ -96,11 +96,10 @@
 				<div class="col-md-4 col-sm-4 col-xs-12" ng-repeat="blog in blogs">
 					<div class="thumbnail">
 						<div class="eachblog hidden-xs">
-							<img class="imgPic" src="<%=path%>/imgs/subject/test.jpg"
-								title="{{blog.title}}" />
+							<a href="javascript:void(0);"><img class="imgPic" ng-src="{{blog.image}}" title="{{blog.title}}" /></a>
 						</div>
 						<div class="caption">
-							<h3 class="h3-title" title="{{blog.title}}">{{blog.title}}</h3>
+							<a href="javascript:void(0);"><h3 class="h3-title" title="{{blog.title}}">{{blog.title}}</h3></a>
 							<p class="hidden-xs hidden-sm"
 								style="text-align:left;margin-bottom:0">{{blog.summary}}</p>
 						</div>
@@ -112,7 +111,7 @@
 
 				</div>
 				<tm-pagination conf="paginationConf"></tm-pagination>
-				<div class="panel panel-default footer">
+				<div class="panel panel-default footer" style="margin-top:50px;">
 					<p>备案号:12345678</p>
 					<p>联系邮箱:Jinzl_v1@163.com</p>
 				</div>
@@ -141,7 +140,7 @@
 					</div>
 
 				</div>
-				<div class="modal-footer" style="padding-top:5px;padding-bottom:5px">
+				<div class="modal-footer" style="padding-top:5px;padding-bottom:5px;">
 					<span ng-bind="error" style="color:red"></span>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 					<button type="button" class="btn btn-primary" ng-click="validate()">确认</button>

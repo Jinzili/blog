@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.alibaba.fastjson.JSON;
+import com.blog.component.JedisClient;
 import com.blog.mapper.BlogCustomMapper;
 import com.blog.mapper.BlogMapper;
 import com.blog.po.Blog;
@@ -27,6 +29,9 @@ public class BlogServiceImpl implements BlogService {
 	@Autowired
 	private BlogCustomMapper blogCustomMapper;
 	
+	@Autowired
+	private JedisClient jedisClient;
+	
 	@Value("${password}")
 	private String password;
 	
@@ -37,17 +42,45 @@ public class BlogServiceImpl implements BlogService {
 	@Override
 	public Map<String,Object> getBlogsByPage(String postData) {
 		Map<String,Integer> map = (Map<String,Integer>)JSON.parse(postData);
-		int start = (map.get("pageIndex") - 1) * map.get("pageSize");
-		map.put("start", start);
-		List<Blog> blogs = blogCustomMapper.getBlogsByPage(map);
 		
-		//总个数
-		int count = blogCustomMapper.getBlogsCount();
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+		int count = 0;
 		
-		resultMap.put("count", count);
-		resultMap.put("items", blogs);
-		return resultMap;
+		//查询redis中是否有总记录数
+		if(jedisClient.get("blogsCount") != null){
+			count = Integer.parseInt(jedisClient.get("blogsCount"));
+		}else{
+			count = blogCustomMapper.getBlogsCount();
+			
+			//将总记录数放到redis中
+			jedisClient.set("blogsCount", String.valueOf(count));
+		}
+		
+		
+		//查询redis中是否有记录
+		String page = "page" + map.get("pageIndex");
+		if(jedisClient.hget("blogs", page) != null){
+			List<Blog> cacheBlogs = (List<Blog>)JSON.parse(jedisClient.hget("blogs", page));
+			
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			
+			resultMap.put("count", count);
+			resultMap.put("items", cacheBlogs);
+			return resultMap;
+			
+		}else{
+			int start = (map.get("pageIndex") - 1) * map.get("pageSize");
+			map.put("start", start);
+			List<Blog> blogs = blogCustomMapper.getBlogsByPage(map);
+			
+			//从数据库中取出后加到redis中
+			jedisClient.hset("blogs", page, JSON.toJSONString(blogs));
+			
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			
+			resultMap.put("count", count);
+			resultMap.put("items", blogs);
+			return resultMap;
+		}
 	}
 
 	@Override
@@ -75,8 +108,13 @@ public class BlogServiceImpl implements BlogService {
 		blog.setContent(map.get("content"));
 		blog.setCreated(new Date());
 		blog.setUpdated(new Date());
+		blog.setImage("http://115.159.212.238/group1/M00/00/00/Cmls61eG-cKAc0mHAADAMjY2lkU612.jpg");
 		blogMapper.insert(blog);
 		int id = blog.getId();
+		
+		//删除redis中的记录
+		jedisClient.del("blogs");
+		jedisClient.del("blogsCount");
 		return CommonResult.ok(id);
 	}
 
@@ -101,6 +139,10 @@ public class BlogServiceImpl implements BlogService {
 			blog.setImage(imgPath.toString());
 			
 			blogMapper.updateByPrimaryKeySelective(blog);
+			
+			//删除redis中的记录
+			jedisClient.del("blogs");
+			jedisClient.del("blogsCount");
 			return CommonResult.ok();
         } catch (Exception e) {
 			// TODO Auto-generated catch block
