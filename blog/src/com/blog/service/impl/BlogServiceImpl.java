@@ -15,6 +15,7 @@ import com.blog.component.JedisClient;
 import com.blog.mapper.BlogCustomMapper;
 import com.blog.mapper.BlogMapper;
 import com.blog.po.Blog;
+import com.blog.po.BlogExample;
 import com.blog.pojo.CommonResult;
 import com.blog.service.BlogService;
 import com.blog.utils.FastDFSClient;
@@ -149,6 +150,14 @@ public class BlogServiceImpl implements BlogService {
 			e.printStackTrace();
 			return CommonResult.build(500, "upload_failed");
 		}
+	}
+
+	@Override
+	public CommonResult getBlogDetail(Integer blogId) {
+		BlogExample example = new BlogExample();
+		example.createCriteria().andIdEqualTo(blogId);
+		List<Blog> blog = blogMapper.selectByExampleWithBLOBs(example);
+		return CommonResult.ok(blog.get(0));
 	}
 	
 }

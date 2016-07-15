@@ -11,9 +11,11 @@
 <html>
 <head>
 <title>金自力的博客</title>
+
+ <link rel="stylesheet" href="<%=path %>/css/blog-detail.css">
 </head>
 
-<body>
+<body ng-controller="detailCtrl">
 	<header class="header visible-xs-block visible-sm-block" header-bg>
 
 		<section>
@@ -82,34 +84,22 @@
 					<div class="panel-body" style="text-align:left">
 						<div class="newBlogDiv">
 							<h3 class="header-h3">
-								<span class="glyphicon glyphicon-book"></span> 已发表的博客
+								<span class="glyphicon glyphicon-book"></span> {{detail.title}}
 							</h3>
-							<div class="newBlogImgBox pull-right">
-								<img data-toggle="modal" data-target="#pwdBox" title="写新博客"
-									class="newBlogImg" src="<%=path%>/imgs/plus.png" />
-							</div>
+							<small>{{detail.updated | date:'yyyy-MM-dd HH:mm:ss'}}</small>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 
-				<div class="col-md-4 col-sm-4 col-xs-12" ng-repeat="blog in blogs">
-					<div class="thumbnail">
-						<div class="eachblog hidden-xs">
-							<img ng-click="blogDetail(blog.id)" class="imgPic" ng-src="{{blog.image}}" title="{{blog.title}}" />
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<h4 style="text-align:left">摘要</h4>
+						<p class="summary">{{detail.summary}}</p>
+						<div class="content" data-ng-bind-html="detail.content">
 						</div>
-						<div class="caption">
-							<h3 ng-click="blogDetail(blog.id)" class="h3-title" title="{{blog.title}}">{{blog.title}}</h3>
-							<p class="hidden-xs hidden-sm"
-								style="text-align:left;margin-bottom:0">{{blog.summary}}</p>
-						</div>
-						<p class="hidden-xs blog-time">{{blog.updated
-							| date:'yyyy-MM-dd HH:mm:ss'}}</p>
 					</div>
-				</div>
 
 				</div>
-				<tm-pagination conf="paginationConf"></tm-pagination>
 				<div class="panel panel-default footer" style="margin-top:50px;">
 					<p>备案号:12345678</p>
 					<p>联系邮箱:Jinzl_v1@163.com</p>
@@ -117,35 +107,6 @@
 			</div>
 		</div>
 
-	</div>
-
-	<!-- Modal -->
-	<div class="modal fade" id="pwdBox" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">请输入密码</h4>
-				</div>
-				<div class="modal-body" style="text-align:left">
-					<div class="input-group">
-						<div class="input-group-addon">password</div>
-						<input type="password" class="form-control" id="password"
-							ng-model="password" ng-keyup="validateKeyUp($event)">
-					</div>
-
-				</div>
-				<div class="modal-footer" style="padding-top:5px;padding-bottom:5px;">
-					<span ng-bind="error" style="color:red"></span>
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" ng-click="validate()">确认</button>
-				</div>
-			</div>
-		</div>
 	</div>
 </body>
 </html>

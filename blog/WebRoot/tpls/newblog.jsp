@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		<section>
 			<ul>
-				<li title="返回主页"><a href="http://blog.dandyweng.com"><i
+				<li title="返回主页"><a href="#/index"><i
 						class="fa fa-home"></i></a></li>
 				<li title="留言板"><a href="http://blog.dandyweng.com/messages/"><i
 						class="fa fa-comments"></i></a></li>
@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</section>
 				<section>
 					<ul>
-						<li title="返回主页"><a href="http://blog.dandyweng.com"><i
+						<li title="返回主页"><a href="#/index"><i
 								class="fa fa-home"></i></a></li>
 						<li title="留言板"><a href="http://blog.dandyweng.com/messages/"><i
 								class="fa fa-comments"></i></a></li>

@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>首页</title>
+    <title>金自力的博客</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -25,7 +25,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="<%=path %>/framework/jquery-2.1.1.min.js"></script>
     <script src="<%=path %>/framework/1.3.0.14/angular.js"></script>
     <script src="<%=path %>/framework/1.3.0.14/angular-route.min.js"></script>
-    <script src="<%=path %>/framework/1.3.0.14/angular-animate.js"></script>
+    <script src="<%=path %>/framework/1.3.0.14/angular-animate.min.js"></script>
+    <script src="<%=path %>/framework/1.3.0.14/angular-cookies.min.js"></script>
+    <script src="<%=path %>/framework/1.3.0.14/angular-sanitize.min.js"></script>
     <script src="<%=path %>/framework/1.3.0.14/tm.pagination.js"></script>
     <script src="<%=path %>/framework/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script src="<%=path %>/js/ng/app.js"></script>

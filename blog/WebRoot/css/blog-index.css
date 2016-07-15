@@ -65,15 +65,6 @@
 	overflow:hidden;
 	padding:0;
 	margin:0 auto;
-	width:225px;
-	height:142px;
-}
-.imgPic{
-    -moz-transition: all 1s ease 0s;
-    -o-transition: all 1s ease 0s;
-    -webkit-transition: all 1s ease 0s;
-    transition: all 1s ease 0s;
-    cursor:pointer;
 }
 
 .imgPic:hover{
@@ -167,11 +158,19 @@
 
 .h3-title{
 	text-align:left;
+	font-size:16px;
 	width:200px;
 	overflow:hidden;
 	white-space:nowrap;
 	text-overflow:ellipsis;
+	cursor:pointer;
+	margin-top:6px;
 }
+
+.h3-title:hover{
+	color:blue;
+}
+
 .page-total input{
 	height:23px;
 }
@@ -222,6 +221,12 @@
 	overflow:auto;
 }
 
+.blog-time{
+	position:absolute;
+	right:15px;
+	bottom:0;
+}
+
 /*没有小于768px，是因为Bootstrap3以移动端优先设计*/
 /* 小屏幕（平板，大于等于768px） */
 @media (min-width: 768px) {
@@ -236,6 +241,20 @@
 		cursor:pointer;
 		margin:2px;
 	}
+	
+	.imgPic{
+	    -moz-transition: all 1s ease 0s;
+	    -o-transition: all 1s ease 0s;
+	    -webkit-transition: all 1s ease 0s;
+	    transition: all 1s ease 0s;
+	    cursor:pointer;
+	    width:100%;
+	    height:142px;
+	}
+	.thumbnail{
+    	min-height:223px;
+    	position:relative;
+    }
 }
 /* 中等屏幕（桌面显示器，大于等于992px） */
 @media (min-width: 992px) {
@@ -251,6 +270,20 @@
 		cursor:pointer;
 		margin:2px;
 	}
+	
+	.imgPic{
+	    -moz-transition: all 1s ease 0s;
+	    -o-transition: all 1s ease 0s;
+	    -webkit-transition: all 1s ease 0s;
+	    transition: all 1s ease 0s;
+	    cursor:pointer;
+	    width:200px;
+	    height:142px;
+	}
+	.thumbnail{
+    	min-height:223px;
+    	position:relative;
+    }
 }
 
 /* 大屏幕（大桌面显示器，大于等于1200px） */
@@ -268,4 +301,18 @@
 		cursor:pointer;
 		margin:2px;
 	}
+	
+	.imgPic{
+    -moz-transition: all 1s ease 0s;
+    -o-transition: all 1s ease 0s;
+    -webkit-transition: all 1s ease 0s;
+    transition: all 1s ease 0s;
+    cursor:pointer;
+    width:225px;
+    height:142px;
+	}
+	.thumbnail{
+    	min-height:263px;
+    	position:relative;
+    }
 }

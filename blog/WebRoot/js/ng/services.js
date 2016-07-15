@@ -24,6 +24,21 @@ blogServices.service('pageService', ['$http',
 				transformRequest: angular.identity 
 			});
 		};
+		
+		this.getBlogDetail = function(blogId){
+			return $http.post('/blog/blog/getBlogDetail',blogId);
+		};
 	}
 ]);
 
+blogServices.service('dataService',function(){
+	var Data = {};
+	this.setData = function(storedata){
+		console.log(storedata);
+		Data = storedata;
+	};
+	
+	this.getData = function(){
+		return Data;
+	};
+});

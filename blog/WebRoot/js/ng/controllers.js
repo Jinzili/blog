@@ -1,4 +1,4 @@
-var blogCtrls = angular.module('blogCtrls', ['tm.pagination']);
+var blogCtrls = angular.module('blogCtrls', ['tm.pagination','ngSanitize']);
 
 blogCtrls.controller('HelloCtrl', ['$scope',
     function($scope) {
@@ -6,8 +6,8 @@ blogCtrls.controller('HelloCtrl', ['$scope',
     }
 ]);
 
-blogCtrls.controller('pageCtrl', ['$scope','pageService','$location',
-    function($scope,pageService,$location) {
+blogCtrls.controller('pageCtrl', ['$scope','pageService','$location','dataService','$cookieStore',
+    function($scope,pageService,$location,dataService,$cookieStore) {
 		var GetAllBlog = function () {
 			 
 	        var postData = {
@@ -69,7 +69,13 @@ blogCtrls.controller('pageCtrl', ['$scope','pageService','$location',
     		}
     	};
     	
-    	 
+    	
+    	
+    	//blog详细页面
+		$scope.blogDetail = function(id){
+			$cookieStore.put("detailid",id);
+			$location.path("/detail");
+		};
   	}
 ]);
 
@@ -131,5 +137,20 @@ blogCtrls.controller('blogCtrl', [ '$scope', 'pageService','$location',
 				}
 			});
 		};
+		
 	} 
+]);
+
+blogCtrls.controller('detailCtrl', [ '$scope','$location','pageService','$cookieStore','$sce',
+       function($scope,$location,pageService,$cookieStore,$sce){
+			var detailid = $cookieStore.get("detailid");
+			pageService.getBlogDetail(detailid).success(function(response){
+				if(response.status == 200){
+					$scope.detail = response.data;
+					$scope.detail.content = $sce.trustAsHtml($scope.detail.content);
+				}else{
+					$location.path("/index");
+				}
+			});
+		}
 ]);

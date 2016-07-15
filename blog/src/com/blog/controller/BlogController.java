@@ -47,7 +47,12 @@ public class BlogController {
 	@ResponseBody
 	public CommonResult uploadImg(@RequestParam(value = "img") MultipartFile img,
 			@RequestParam Integer blogId){
-		System.out.println("asdfasdfsdfas"+img);
 		return blogService.uploadImg(blogId,img);
+	}
+	
+	@RequestMapping("/getBlogDetail")
+	@ResponseBody
+	public CommonResult getBlogDetail(@RequestBody Integer blogId){
+		return blogService.getBlogDetail(blogId);
 	}
 }

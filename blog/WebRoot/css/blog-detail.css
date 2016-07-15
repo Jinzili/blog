@@ -1,0 +1,50 @@
+.summary{
+	display:block;
+	text-align:left;
+	background-color:#eee;
+	text-indent:2em;
+	padding:20px;
+}
+
+.content{
+	padding-left:20px;
+	padding-right:20px;
+	text-align:left;
+}
+/*没有小于768px，是因为Bootstrap3以移动端优先设计*/
+/* 小屏幕（平板，大于等于768px） */
+@media (min-width: 768px) {
+	.header-h3{
+		font-size:14px;
+		display:inline-block;
+		margin:0px;
+	}
+	pre code{
+		font-size:17px;
+	}
+	
+}
+/* 中等屏幕（桌面显示器，大于等于992px） */
+@media (min-width: 992px) {
+	.header-h3{
+		font-size:14px;
+		display:inline-block;
+		margin:0px;
+	}
+	pre code{
+		font-size:inherit;
+	}
+}
+
+/* 大屏幕（大桌面显示器，大于等于1200px） */
+@media (min-width: 1200px) {
+	.header-h3{
+		line-height:25px;
+		font-size:25px;
+		display:inline-block;
+		margin:0px;
+	}
+	pre code{
+		font-size:inherit;
+	}
+}
