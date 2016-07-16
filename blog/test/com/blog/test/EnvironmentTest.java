@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.blog.component.JedisClient;
+import com.blog.utils.MD5Util;
 
 public class EnvironmentTest {
 
@@ -45,5 +46,11 @@ public class EnvironmentTest {
 		String s = jedisClient.get("test");
 		
 		System.out.println(s);
+	}
+
+	@Test
+	public void MD5Test() throws Exception{
+		String result = MD5Util.md5Encode("个人博客网站-第一篇博客");
+		System.out.println(result);
 	}
 }

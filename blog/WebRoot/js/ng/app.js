@@ -10,11 +10,14 @@ blogApp.config(function($routeProvider) {
         templateUrl: 'tpls/blog-index.jsp',
         controller: 'pageCtrl'
     }).when('/newblog', {
-        templateUrl: 'tpls/newblog.jsp',
+        templateUrl: 'tpls/blog-create.jsp',
         controller: 'blogCtrl'
     }).when('/detail', {
         templateUrl: 'tpls/blog-detail.jsp',
         controller: 'detailCtrl'
+    }).when('/message', {
+        templateUrl: 'tpls/blog-message.jsp',
+        controller: 'messageCtrl'
     }).otherwise({
         redirectTo: '/hello'
     });

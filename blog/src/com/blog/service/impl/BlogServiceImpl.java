@@ -151,13 +151,36 @@ public class BlogServiceImpl implements BlogService {
 			return CommonResult.build(500, "upload_failed");
 		}
 	}
-
+	
+	/*
+	 * 
+	 * @param blogId 博客id
+	 * @return
+	 * TODO 得到博客详细信息
+	 * author jin
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public CommonResult getBlogDetail(Integer blogId) {
-		BlogExample example = new BlogExample();
-		example.createCriteria().andIdEqualTo(blogId);
-		List<Blog> blog = blogMapper.selectByExampleWithBLOBs(example);
-		return CommonResult.ok(blog.get(0));
+		
+		//先查询redis中是否有记录
+		String result = jedisClient.hget("blogdetail", blogId+"");
+		if(result != null){
+			List<Blog> blog = (List<Blog>)JSON.parse(result);
+			
+			return CommonResult.ok(blog.get(0));
+		}else{
+			BlogExample example = new BlogExample();
+			example.createCriteria().andIdEqualTo(blogId);
+			List<Blog> blog = blogMapper.selectByExampleWithBLOBs(example);
+			if(blog.size() >= 0){
+				//将记录放到redis中
+				jedisClient.hset("blogdetail", blogId+"", JSON.toJSONString(blog));
+				return CommonResult.ok(blog.get(0));
+			}else{
+				return CommonResult.build(500, "服务器异常");
+			}
+		}
 	}
 	
 }

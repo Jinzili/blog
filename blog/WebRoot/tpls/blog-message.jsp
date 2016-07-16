@@ -82,10 +82,11 @@
 					<div class="panel-body" style="text-align:left">
 						<div class="newBlogDiv">
 							<h3 class="header-h3">
-								<span class="glyphicon glyphicon-book"></span> 已发表的博客
+								<span class="glyphicon glyphicon-user"></span> 留言板
 							</h3>
+							<small>留下你的脚印吧</small>
 							<div class="newBlogImgBox pull-right">
-								<img data-toggle="modal" data-target="#pwdBox" title="写新博客"
+								<img data-toggle="modal" data-target="#pwdBox" title="写新留言"
 									class="newBlogImg" src="<%=path%>/imgs/plus.png" />
 							</div>
 						</div>
@@ -94,18 +95,7 @@
 				<div class="row">
 
 				<div class="col-md-4 col-sm-4 col-xs-12" ng-repeat="blog in blogs">
-					<div class="thumbnail">
-						<div class="eachblog hidden-xs">
-							<img ng-click="blogDetail(blog.id)" class="imgPic" ng-src="{{blog.image}}" title="{{blog.title}}" />
-						</div>
-						<div class="caption">
-							<h3 ng-click="blogDetail(blog.id)" class="h3-title" title="{{blog.title}}">{{blog.title}}</h3>
-							<p class="hidden-xs hidden-sm"
-								style="text-align:left;margin-bottom:0">{{blog.summary}}</p>
-						</div>
-						<p class="hidden-xs blog-time">{{blog.updated
-							| date:'yyyy-MM-dd HH:mm:ss'}}</p>
-					</div>
+					
 				</div>
 
 				</div>

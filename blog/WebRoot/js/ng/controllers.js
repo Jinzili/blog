@@ -154,3 +154,9 @@ blogCtrls.controller('detailCtrl', [ '$scope','$location','pageService','$cookie
 			});
 		}
 ]);
+
+blogCtrls.controller('messageCtrl',['$scope','$location',
+        function($scope,$location){
+			
+		}
+]);
