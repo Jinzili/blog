@@ -1,5 +1,7 @@
 package com.blog.test;
 
+import java.util.Random;
+
 import org.csource.fastdfs.ClientGlobal;
 import org.csource.fastdfs.StorageClient;
 import org.csource.fastdfs.StorageServer;
@@ -28,7 +30,7 @@ public class EnvironmentTest {
 		StorageClient storageClient = new StorageClient(trackerServer, storageServer);
 		
 		
-		String[] upload_file = storageClient.upload_file("C:\\Users\\Administrator\\Desktop\\default.jpg", "jpg", null);
+		String[] upload_file = storageClient.upload_file("C:\\Users\\Administrator\\Desktop\\userphoto.jpg", "jpg", null);
 		for (String string : upload_file) {
 			System.out.println(string);
 		}
@@ -52,5 +54,20 @@ public class EnvironmentTest {
 	public void MD5Test() throws Exception{
 		String result = MD5Util.md5Encode("个人博客网站-第一篇博客");
 		System.out.println(result);
+	}
+	
+	@Test
+	public void userNameTest() throws Exception{
+		Random rnd = new Random();
+		int num1 = rnd.nextInt(89999) + 10000;
+		int num2 = rnd.nextInt(89999) + 10000;
+		int num3 = rnd.nextInt(89999) + 10000;
+		int num4 = rnd.nextInt(89999) + 10000;
+		int num5 = rnd.nextInt(89999) + 10000;
+		System.out.println(num1);
+		System.out.println(num2);
+		System.out.println(num3);
+		System.out.println(num4);
+		System.out.println(num5);
 	}
 }

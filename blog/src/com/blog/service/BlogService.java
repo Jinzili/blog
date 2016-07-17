@@ -18,4 +18,5 @@ public interface BlogService {
 	public CommonResult uploadImg(Integer blogId, MultipartFile img);
 
 	public CommonResult getBlogDetail(Integer blogId);
+	
 }

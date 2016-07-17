@@ -11,6 +11,7 @@
 <html>
 <head>
 <title>金自力的博客</title>
+<link rel="stylesheet" href="<%=path %>/css/blog-message.css">
 </head>
 
 <body>
@@ -41,7 +42,7 @@
 			</ul>
 		</section>
 	</header>
-	<div class="container" style="width:100%" ng-controller="pageCtrl">
+	<div class="container" style="width:100%">
 
 		<div class="row">
 			<div class="col-md-4 hidden-sm hidden-xs myself" header-bg ng-height>
@@ -86,7 +87,7 @@
 							</h3>
 							<small>留下你的脚印吧</small>
 							<div class="newBlogImgBox pull-right">
-								<img data-toggle="modal" data-target="#pwdBox" title="写新留言"
+								<img data-toggle="modal" data-target="#messageBox" title="写新留言"
 									class="newBlogImg" src="<%=path%>/imgs/plus.png" />
 							</div>
 						</div>
@@ -94,8 +95,21 @@
 				</div>
 				<div class="row">
 
-				<div class="col-md-4 col-sm-4 col-xs-12" ng-repeat="blog in blogs">
-					
+				<div class="col-md-12 col-sm-12 col-xs-12" style="text-align:left" ng-repeat="message in messages">
+					<div class="panel panel-default">
+					  <div class="panel-body">
+					    <div class="media">
+						  <div class="media-left">
+						      <img height="63px" width="64px" class="media-object img-circle" ng-src="{{message.userphoto}}" alt="{{message.username}}">
+						  </div>
+						  <div class="media-body">
+						    <h4 class="media-heading">{{message.username}}&nbsp;:</h4>
+						    <p>{{message.message}}</p>
+						    <p><small>{{message.created | date:'yyyy-MM-dd HH:mm:ss'}}</small></p>
+						  </div>
+						</div>
+					  </div>
+					</div>
 				</div>
 
 				</div>
@@ -110,7 +124,7 @@
 	</div>
 
 	<!-- Modal -->
-	<div class="modal fade" id="pwdBox" tabindex="-1" role="dialog"
+	<div class="modal fade" id="messageBox" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -119,20 +133,30 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">请输入密码</h4>
+					<h4 class="modal-title" id="myModalLabel">请输入留言</h4>
 				</div>
 				<div class="modal-body" style="text-align:left">
-					<div class="input-group">
-						<div class="input-group-addon">password</div>
-						<input type="password" class="form-control" id="password"
-							ng-model="password" ng-keyup="validateKeyUp($event)">
+					<div class="form-group">
+						<label for="exampleInputFile">头像</label> <input
+							type="file" id="userphoto" name="userphoto" ng-model="formData.userphoto" accept="image/*">
+						<p class="help-block">如果没有上传头像,将使用默认头像(支持jpg,jpeg格式)!</p>
 					</div>
-
+					<div class="form-group">
+						<label for="exampleInputEmail1">用户名</label> <input
+							type="text" class="form-control" id="username"
+							placeholder="请给自己一个昵称哦" name="username" ng-model="formData.username">
+						<p class="help-block">如果没有输入用户名,将使用默认用户名!</p>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">留言内容</label> <input
+							type="text" class="form-control" id="message"
+							placeholder="请输入留言哦" name="message" ng-model="formData.message">
+					</div>
 				</div>
 				<div class="modal-footer" style="padding-top:5px;padding-bottom:5px;">
 					<span ng-bind="error" style="color:red"></span>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" ng-click="validate()">确认</button>
+					<button type="button" class="btn btn-primary" ng-click="createMessage()">确认</button>
 				</div>
 			</div>
 		</div>

@@ -138,6 +138,14 @@ blogCtrls.controller('blogCtrl', [ '$scope', 'pageService','$location',
 			});
 		};
 		
+		//窗口变化时,及时改变大小
+		$scope.$watch(function(){
+ 		   return document.documentElement.clientHeight;
+ 		}, function(value) {
+ 		        angular.element(".myself").css("height",""+value+"px");
+ 		        angular.element(".right-box").css("height",""+value+"px");
+ 		  }
+		);
 	} 
 ]);
 
@@ -152,11 +160,79 @@ blogCtrls.controller('detailCtrl', [ '$scope','$location','pageService','$cookie
 					$location.path("/index");
 				}
 			});
+			
+			//窗口变化时,及时改变大小
+			$scope.$watch(function(){
+	 		   return document.documentElement.clientHeight;
+	 		}, function(value) {
+	 		        angular.element(".myself").css("height",""+value+"px");
+	 		        angular.element(".right-box").css("height",""+value+"px");
+	 		  }
+			);
 		}
 ]);
 
-blogCtrls.controller('messageCtrl',['$scope','$location',
-        function($scope,$location){
+blogCtrls.controller('messageCtrl',['$scope','$location','messageService',
+        function($scope,$location,messageService){
+			$scope.formData = {
+					username:""
+			};
 			
+			$scope.flag = false;//标记是否留言成功,上传成功使flag变化,并触发$watch函数.
+			
+			$scope.createMessage = function(){
+				console.log($scope.formData);
+				if($scope.formData.message == "" || $scope.formData.message == null){
+					$scope.error = "请输入留言内容";
+					return ;
+				}
+				messageService.createMessage($scope.formData).success(function(response){
+					if(response.status == 200){
+						$scope.flag = !$scope.flag;
+						$('#messageBox').modal('hide');
+					}else{
+						if(response.msg == "ext_failed"){
+							$scope.uploadfailed = "上传文件格式不符合";
+						}else{
+							$scope.uploadfailed = "服务器异常";
+						}
+					}
+				});
+			};
+			
+			var GetMessage = function () {
+		        var postData = {
+		            pageIndex: $scope.paginationConf.currentPage,
+		            pageSize: $scope.paginationConf.itemsPerPage
+		        };
+		
+		        messageService.list(postData).success(function (response) {
+		            $scope.paginationConf.totalItems = response.count;
+		            $scope.messages = response.items;
+		        });
+		
+		    };
+		
+		    //配置分页基本参数
+		    $scope.paginationConf = {
+		        currentPage: 1,
+		        itemsPerPage: 9,
+		        perPageOptions: [9],
+		    };
+		
+		    /***************************************************************
+		    当页码和页面记录数发生变化时监控后台查询
+		    如果把currentPage和itemsPerPage分开监控的话则会触发两次后台事件。 
+		    ***************************************************************/
+	    	$scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', GetMessage);
+			//窗口变化时,及时改变大小
+			$scope.$watch(function(){
+	 		   return document.documentElement.clientHeight;
+	 		}, function(value) {
+	 		        angular.element(".myself").css("height",""+value+"px");
+	 		        angular.element(".right-box").css("height",""+value+"px");
+	 		  }
+			);
+			$scope.$watch('flag', GetMessage);
 		}
 ]);

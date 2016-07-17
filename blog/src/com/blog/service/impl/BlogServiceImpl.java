@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -133,7 +132,6 @@ public class BlogServiceImpl implements BlogService {
 			blog.setId(blogId);
 			FastDFSClient fdc = new FastDFSClient("classpath:properties/upload.conf");
 			byte[] bytes = img.getBytes();
-			System.out.println("ext" + ext);
 			StringBuffer imgPath = new StringBuffer();
 			String[] uploadImgInfo = fdc.uploadFile(bytes, ext);
 			imgPath.append("http://115.159.212.238/").append(uploadImgInfo[0]).append("/").append(uploadImgInfo[1]);
@@ -182,5 +180,5 @@ public class BlogServiceImpl implements BlogService {
 			}
 		}
 	}
-	
+
 }
