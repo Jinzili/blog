@@ -108,7 +108,7 @@ public class BlogServiceImpl implements BlogService {
 		blog.setContent(map.get("content"));
 		blog.setCreated(new Date());
 		blog.setUpdated(new Date());
-		blog.setImage("http://115.159.212.238/group1/M00/00/00/Cmls61eG-cKAc0mHAADAMjY2lkU612.jpg");
+		blog.setImage("http://115.159.212.238:81/group1/M00/00/00/Cmls61eG-cKAc0mHAADAMjY2lkU612.jpg");
 		blogMapper.insert(blog);
 		int id = blog.getId();
 		
@@ -134,7 +134,7 @@ public class BlogServiceImpl implements BlogService {
 			byte[] bytes = img.getBytes();
 			StringBuffer imgPath = new StringBuffer();
 			String[] uploadImgInfo = fdc.uploadFile(bytes, ext);
-			imgPath.append("http://115.159.212.238/").append(uploadImgInfo[0]).append("/").append(uploadImgInfo[1]);
+			imgPath.append("http://115.159.212.238:81/").append(uploadImgInfo[0]).append("/").append(uploadImgInfo[1]);
 			blog.setImage(imgPath.toString());
 			
 			blogMapper.updateByPrimaryKeySelective(blog);

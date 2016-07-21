@@ -59,6 +59,12 @@
 						此博客的前端设计有参考翁天信老师的博客,这里是翁天信老师的<a target="_blank"
 							href="http://blog.dandyweng.com/">博客主页</a>。
 					</p>
+					<p>采用的技术有:</p>
+					<p>后端框架:SSM</p>
+					<p>前端框架:bootstrap、AngularJS</p>
+					<p>数据库:MySQL、Redis</p>
+					<p>服务器:Tomcat、Nginx</p>
+					<p>图片服务器:fastDFS</p>
 				</section>
 				<section>
 					<ul>

@@ -52,7 +52,7 @@ public class MessageServiceImpl implements MessageService {
 		
 		//判断访客是否上传了头像,如果没有则使用默认的头像,如果上传了则使用用户上传的头像,并且上传到fastDFS
 		if(userphoto == null){
-			ms.setUserphoto("http://115.159.212.238/group1/M00/00/00/Cmls61eLeKGABEUNAAAJpOMkFo4124.jpg");
+			ms.setUserphoto("http://115.159.212.238:81/group1/M00/00/00/Cmls61eLeKGABEUNAAAJpOMkFo4124.jpg");
 		}else{
 			try {
 				String fileName = userphoto.getOriginalFilename();
@@ -65,7 +65,7 @@ public class MessageServiceImpl implements MessageService {
 				byte[] bytes = userphoto.getBytes();
 				StringBuffer imgPath = new StringBuffer();
 				String[] uploadImgInfo = fdc.uploadFile(bytes, ext);
-				imgPath.append("http://115.159.212.238/").append(uploadImgInfo[0]).append("/").append(uploadImgInfo[1]);
+				imgPath.append("http://115.159.212.238:81/").append(uploadImgInfo[0]).append("/").append(uploadImgInfo[1]);
 				ms.setUserphoto(imgPath.toString());
 			} catch (Exception e) {
 				return CommonResult.build(500, "failed");
